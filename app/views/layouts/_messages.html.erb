@@ -1,0 +1,25 @@
+<% flash.each do |message_type,message_content| %>
+<div class="ui <%= message_type%> message transition">
+  <i class="close icon"></i>
+  <div class="header">
+    <%=message_content %>
+  </div>
+</div>
+<%end %>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  $(document).ready(function () {
+    // Add click event handler to the close icon
+    $('.close.icon').on('click', function () {
+      // Hide the parent message when the close icon is clicked
+      console.log("hi babe");
+      $(this).closest('.message').transition('fade');
+    });
+
+    // Automatically hide messages after 5 seconds
+    setTimeout(function () {
+      $('.message').transition('fade');
+    }, 5000);
+  });
+</script>

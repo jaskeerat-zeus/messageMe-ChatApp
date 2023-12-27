@@ -1,0 +1,75 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<h2 class="ui center aligned medium icon header">
+  <i class="circular blue users icon"></i>
+  Chat Globally
+</h2>
+<div class="ui two column grid" >
+    <div class="ui twelve wide column" >
+      <div class="ui fluid raised card " id="chatbox" style="overflow-y: scroll; height:400px;">
+      <div class="content"  id="myDiv" >
+            <div class="ui feed">
+            <h4 class="ui header">Users Activity</h4>
+              <%= render @messages%>
+            </div>
+        </div>
+       
+        <div class ="extra content" >
+            <%= form_for(@message,html: {class:"ui reply form",role:  "form"}, url: message_path) do |f| %>
+                <div class="field">
+                 <div class="ui fluid icon input ">
+                    <%= f.text_field :body%>
+                    <%= f.button '<i class="bordered inverted  green edit icon"> </i>'.html_safe %>
+                 </div>
+                </div>
+            <%end%>
+        </div>
+        
+    </div>
+</div>
+
+  <div class="four wide column">
+      <div class="ui fluid raised card " id="chatbox">
+              <div class="content">
+        <div class="ui inverted vertical pointing menu">
+        <a class="active item">
+            Home
+        </a>
+        <a class="item">
+            Messages
+        </a>
+        <a class="item">
+            Friends
+        </a>
+        </div>
+        </div>
+   </div>
+  </div>
+</div>
+
+
+<script>
+$(document).ready(function() {
+    // Function to refresh content
+    function refreshContent() {
+        // Code to update or reload the content of the div
+        $('#myDiv').load(location.href + ' #myDiv');
+    }
+ function scrollToBottom() {
+        $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
+    }
+ 
+    // Refresh content every 5 seconds (5000 milliseconds)
+    setInterval(refreshContent, 3000);
+   $('#new_message').submit(function(event) {
+        // Perform form submission
+        // ... (Your existing form submission logic)
+
+        // Scroll to the bottom of the chatbox after form submission
+
+        scrollToBottom();
+    });
+
+});
+</script>
+
+
